@@ -1,0 +1,14 @@
+{
+  "list_items": [
+    { "id": 0, "text": "O1 Layer", "is_selected": false },
+    { "id": 1, "text": "O1 Layer", "is_selected": false },
+    { "id": 2, "text": "O1 Layer", "is_selected": false },
+    { "id": 3, "text": "O1 Layer", "is_selected": false },
+    { "id": 4, "text": "O1 Layer", "is_selected": false },
+    { "id": 5, "text": "O1 Layer", "is_selected": false },
+    { "id": 6, "text": "O1 Layer", "is_selected": false },
+    { "id": 7, "text": "O1 Layer", "is_selected": false },
+    { "id": 8, "text": "O1 Layer", "is_selected": false },
+    { "id": 9, "text": "O1 Layer", "is_selected": false }
+  ]
+}

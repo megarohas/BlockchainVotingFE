@@ -1,0 +1,24 @@
+body {
+  margin: 0 !important;
+}
+
+.bcv-list-wrapper {
+  width: 100%;
+  overflow: scroll;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0px;
+  font-family: "Hind Siliguri", sans-serif;
+}
+
+.bcv-list {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 35%;
+  outline: 2px solid rgb(216, 216, 216);
+  outline-offset: -2px;
+}
