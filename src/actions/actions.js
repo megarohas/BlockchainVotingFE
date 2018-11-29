@@ -12,9 +12,9 @@ export function getListItems() {
   };
 }
 
-export function editListItem({ id, text, is_selected }) {
+export function setActivePage(id) {
   return {
-    type: "EDIT_ITEM",
-    payload: { id, text, is_selected }
+    type: "SET_ACTIVE_PAGE",
+    payload: { id }
   };
 }

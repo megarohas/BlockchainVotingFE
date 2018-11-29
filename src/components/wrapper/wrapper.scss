@@ -1,24 +1,59 @@
-body {
-  margin: 0 !important;
-}
-
-.bcv-list-wrapper {
+.bcv-wrapper {
   width: 100%;
-  overflow: scroll;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 0px;
-  font-family: "Hind Siliguri", sans-serif;
-}
-
-.bcv-list {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
   flex-direction: column;
-  width: 35%;
-  outline: 2px solid rgb(216, 216, 216);
-  outline-offset: -2px;
+}
+
+.bcv-wrapper-title {
+  font-weight: 900;
+  font-size: 60px;
+}
+
+.bcv-wrapper-nav_bar {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: black;
+  height: 50px;
+  color: white;
+  align-items: center;
+  width: 100%;
+  padding: 0px 30px;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.4); /* Параметры тени */
+  user-select: none;
+}
+
+.bcv-page {
+  margin-top: 70px;
+}
+
+.bcv-wrapper-nav_bar-logo {
+  font-size: 25px;
+  font-weight: 900;
+  margin-right: 20px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0);
+}
+
+.bcv-wrapper-nav_bar-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 6px);
+  margin: 0px 5px;
+  padding: 0px 5px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0);
+  border-top: 3px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+}
+
+.bcv-wrapper-nav_bar-item_active {
+  @extend .bcv-wrapper-nav_bar-item;
+  border-bottom: 3px solid white;
+  border-top: 3px solid rgba(0, 0, 0, 0);
+  cursor: default;
 }

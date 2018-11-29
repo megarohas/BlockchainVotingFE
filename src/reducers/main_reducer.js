@@ -1,5 +1,5 @@
 const default_state = {
-  items: []
+  active_page: 0
 };
 
 export default (state = default_state, action) => {
@@ -8,6 +8,12 @@ export default (state = default_state, action) => {
       return {
         ...state,
         items: []
+      };
+    }
+    case "SET_ACTIVE_PAGE": {
+      return {
+        ...state,
+        active_page: action.payload.id
       };
     }
 
