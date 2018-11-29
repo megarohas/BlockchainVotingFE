@@ -52,7 +52,7 @@ class Wrapper extends PureComponent {
 
   render() {
     return (
-      <div className="">
+      <div className="bcv-wrapper">
         {this.renderNavBar()}
         {this.renderActiveChild()}
       </div>

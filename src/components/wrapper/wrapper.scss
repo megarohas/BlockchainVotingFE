@@ -4,8 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  //padding: 20px;
   flex-direction: column;
+  position: relative;
 }
 
 .bcv-wrapper-title {
@@ -26,10 +27,16 @@
   padding: 0px 30px;
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.4); /* Параметры тени */
   user-select: none;
+  z-index: 9;
 }
 
 .bcv-page {
   margin-top: 70px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .bcv-wrapper-nav_bar-logo {
@@ -56,4 +63,11 @@
   border-bottom: 3px solid white;
   border-top: 3px solid rgba(0, 0, 0, 0);
   cursor: default;
+}
+
+.bcv-hello_form-form-captcha_block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }

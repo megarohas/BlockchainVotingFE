@@ -1,0 +1,97 @@
+.bcv-hello_form-form {
+  background-color: white;
+  border-radius: 1px;
+  width: 438px;
+  //height: 300px;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1); /* Параметры тени */
+  padding: 20px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.bcv-hello_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  //z-index: 999999;
+  top: 0px;
+  left: 0px;
+  // top: calc(50% - 229px);
+  // left: calc(50% - 290px);
+}
+
+.bcv-hello_form-form-node_title {
+  font-size: 20px;
+  font-weight: 500;
+  width: 100%;
+}
+.bcv-hello_form-form-node_input {
+  font-size: 20px;
+  font-weight: 500;
+  border: 1px solid black;
+  height: 30px;
+  width: 100%;
+  padding: 0px 10px;
+  font-family: "Chakra Petch", sans-serif !important;
+}
+
+.bcv-hello_form-form-side_block {
+  width: 100%;
+}
+
+.bcv-hello_form-form-input_block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.bcv-hello_form-form-input_block-node {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.bcv-hello_form-form-not_registered {
+  margin-top: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bcv-hello_form-form-btn_block {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 78px;
+}
+
+.bcv-btn {
+  //width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 20px;
+  user-select: none;
+  border-radius: 1px;
+}
+
+.bcv-hello_form-form-not_registered-link {
+  text-decoration: underline;
+  cursor: pointer;
+  margin: 0px 10px;
+}
