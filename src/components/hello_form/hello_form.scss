@@ -88,6 +88,11 @@
   font-size: 20px;
   user-select: none;
   border-radius: 1px;
+  border: 1px solid black;
+  &:active {
+    color: black;
+    background-color: white;
+  }
 }
 
 .bcv-hello_form-form-not_registered-link {

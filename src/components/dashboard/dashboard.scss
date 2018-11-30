@@ -1,0 +1,71 @@
+.bcv-page_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bcv-dasboard {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  //background-color: white;
+  //box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1); /* Параметры тени */
+  //border-radius: 1px;
+  //padding: 30px;
+}
+
+.bcv-dasboard-searchbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 80%;
+  background-color: white;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1); /* Параметры тени */
+}
+
+.bcv-dasboard-searchbar_border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 1px;
+  background-color: white;
+  padding: 0px 10px;
+}
+
+.fb3-page_information-simple_input {
+  border: none;
+  //padding: 0px 10px;
+  width: 100%;
+  height: 30px;
+  outline: none;
+  font-size: 20px;
+  font-family: "Chakra Petch", sans-serif !important;
+}
+
+.bcv-dasboard-searchbar-ico {
+  padding: 0px 10px 0px 0px;
+}
+
+.bcv-dasboard-poll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1); /* Параметры тени */
+  margin-top: 20px;
+  //max-width: 100%;
+  //width: 100%;
+}
+
+.bcv-dasboard-poll-node {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

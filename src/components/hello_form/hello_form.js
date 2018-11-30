@@ -11,6 +11,7 @@ class HelloForm extends PureComponent {
     this.state = {
       is_log_in: true,
       login_btn_state: false,
+      reg_btn_state: false,
       login: "",
       password: "",
       password_confirm: ""
@@ -24,11 +25,31 @@ class HelloForm extends PureComponent {
     return (
       <div className="bcv-hello_form-form-input_block">
         <div className="bcv-hello_form-form-input_block-node">
-          <div className="bcv-hello_form-form-node_title">Login:</div>
+          <div className="bcv-hello_form-form-node_title">Email:</div>
           <input className="bcv-hello_form-form-node_input" />
         </div>
         <div className="bcv-hello_form-form-input_block-node">
           <div className="bcv-hello_form-form-node_title">Password:</div>
+          <input className="bcv-hello_form-form-node_input" type="password" />
+        </div>
+      </div>
+    );
+  }
+  renderRegInputBlock() {
+    return (
+      <div className="bcv-hello_form-form-input_block">
+        <div className="bcv-hello_form-form-input_block-node">
+          <div className="bcv-hello_form-form-node_title">Email:</div>
+          <input className="bcv-hello_form-form-node_input" />
+        </div>
+        <div className="bcv-hello_form-form-input_block-node">
+          <div className="bcv-hello_form-form-node_title">Password:</div>
+          <input className="bcv-hello_form-form-node_input" type="password" />
+        </div>
+        <div className="bcv-hello_form-form-input_block-node">
+          <div className="bcv-hello_form-form-node_title">
+            Confirm Password:
+          </div>
           <input className="bcv-hello_form-form-node_input" type="password" />
         </div>
       </div>
@@ -56,12 +77,61 @@ class HelloForm extends PureComponent {
       </div>
     );
   }
+  renderRegCaptchaBlock() {
+    return (
+      <div className="bcv-hello_form-form-captcha_block">
+        <div className="bcv-hello_form-form-btn_block">
+          {!this.state.reg_btn_state ? (
+            <ReCAPTCHA
+              sitekey="6Lcxun0UAAAAAHYKikR75_A0dYupt4gf1yBB0qPn"
+              onChange={value => {
+                console.log(value);
+                setTimeout(() => {
+                  this.setState({ reg_btn_state: true });
+                }, 1000);
+              }}
+            />
+          ) : (
+            <div className="bcv-btn">Register</div>
+          )}
+        </div>
+      </div>
+    );
+  }
   returnLogInLinkBlock() {
     return (
       <div className="bcv-hello_form-form-not_registered">
         Not registered?{" "}
-        <div className="bcv-hello_form-form-not_registered-link">
+        <div
+          className="bcv-hello_form-form-not_registered-link"
+          onClick={() => {
+            this.setState({
+              is_log_in: false,
+              reg_btn_state: false,
+              login_btn_state: false
+            });
+          }}
+        >
           Create an account
+        </div>
+      </div>
+    );
+  }
+  returnRegLinkBlock() {
+    return (
+      <div className="bcv-hello_form-form-not_registered">
+        Registered?{" "}
+        <div
+          className="bcv-hello_form-form-not_registered-link"
+          onClick={() => {
+            this.setState({
+              is_log_in: true,
+              reg_btn_state: false,
+              login_btn_state: false
+            });
+          }}
+        >
+          LogIn
         </div>
       </div>
     );
@@ -76,12 +146,25 @@ class HelloForm extends PureComponent {
       </div>
     );
   }
+  renderRegBlock() {
+    return (
+      <div style={{ width: "100%" }}>
+        {this.renderRegInputBlock()}
+        {this.renderRegCaptchaBlock()}
+        {this.returnRegLinkBlock()}
+      </div>
+    );
+  }
 
   render() {
     return (
       <div className="bcv-hello_form">
         <div className="bcv-wrapper-title">Blockchain Voting</div>
-        <div className="bcv-hello_form-form">{this.renderLogInBlock()}</div>
+        <div className="bcv-hello_form-form">
+          {this.state.is_log_in
+            ? this.renderLogInBlock()
+            : this.renderRegBlock()}
+        </div>
       </div>
     );
   }
