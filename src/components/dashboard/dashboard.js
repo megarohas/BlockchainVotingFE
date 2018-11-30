@@ -44,7 +44,7 @@ class Dashboard extends PureComponent {
       </div>
     );
   }
-  renderPolls() {
+  renderPoll() {
     return (
       <div style={{ width: "100%" }}>
         <div className="bcv-dasboard-poll">
@@ -56,6 +56,11 @@ class Dashboard extends PureComponent {
           <div className="bcv-dasboard-poll-node">ACTION</div>
         </div>
       </div>
+    );
+  }
+  renderPolls() {
+    return [1, 1, 1, 1, 1, 11, 1, 11, 1, 1, 1, 1, 1, 1, 1, 11, 1, 11, 1, 1].map(
+      item => this.renderPoll()
     );
   }
   render() {
