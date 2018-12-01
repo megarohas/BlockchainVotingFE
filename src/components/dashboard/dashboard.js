@@ -4,14 +4,25 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { deleteListItem } from "../../actions/actions.js";
 import DebounceInput from "react-debounce-input";
+import { get } from "../../utils/fetcher.js";
 
 class Dashboard extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      all_polls: [],
+      searched_polls: []
+    };
   }
   componentDidMount() {
     //this.props.getItems();
+    get("../../../public/mocks/mock_items.json").then(response => {
+      console.log(response);
+      this.setState({
+        all_polls: response.polls,
+        searched_polls: response.polls
+      });
+    });
   }
 
   renderSearchBar() {
@@ -44,33 +55,94 @@ class Dashboard extends PureComponent {
       </div>
     );
   }
-  renderPoll() {
+  renderPollTableHeader() {
+    return (
+      <div className="bcv-dasboard-poll_table-header">
+        <div className="bcv-dasboard-poll-node">Poll ID</div>
+        <div className="bcv-dasboard-poll-node" style={{ width: "150%" }}>
+          Author
+        </div>
+        <div className="bcv-dasboard-poll-node" style={{ width: "150%" }}>
+          Theme
+        </div>
+        <div className="bcv-dasboard-poll-node">Start Date</div>
+        <div className="bcv-dasboard-poll-node">Finish Date</div>
+        <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
+          Status
+        </div>
+        <div className="bcv-dasboard-poll-node">Actions</div>
+      </div>
+    );
+  }
+  renderPoll(poll) {
     return (
       <div style={{ width: "100%" }}>
         <div className="bcv-dasboard-poll">
-          <div className="bcv-dasboard-poll-node">1</div>
-          <div className="bcv-dasboard-poll-node">Author</div>
-          <div className="bcv-dasboard-poll-node">11.11.29</div>
-          <div className="bcv-dasboard-poll-node">11.12.29</div>
-          <div className="bcv-dasboard-poll-node">OK</div>
-          <div className="bcv-dasboard-poll-node">ACTION</div>
+          <div className="bcv-dasboard-poll-node">{poll.id}</div>
+          <div className="bcv-dasboard-poll-node" style={{ width: "150%" }}>
+            {poll.author}
+          </div>
+          <div className="bcv-dasboard-poll-node" style={{ width: "150%" }}>
+            {poll.theme}
+          </div>
+          <div className="bcv-dasboard-poll-node">{poll.start_date}</div>
+          <div className="bcv-dasboard-poll-node">{poll.finish_date}</div>
+          <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
+            <div className="bcv-dasboard-poll-node-status">
+              <div
+                className={
+                  poll.status
+                    ? "bcv-dasboard-poll-node-status-ok"
+                    : "bcv-dasboard-poll-node-status-not_ok"
+                }
+              />
+            </div>
+          </div>
+          <div className="bcv-dasboard-poll-node">
+            <div
+              style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
+              className="bcv-btn"
+              title="Check Poll"
+            >
+              <img src="https://icongr.am/clarity/shield-check.svg?size=18&color=ffffff" />
+            </div>
+            <div style={{ width: "10px", height: "1px" }} />
+            <div
+              style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
+              className="bcv-btn"
+              title="View Poll"
+            >
+              <img src="https://icongr.am/clarity/eye.svg?size=18&color=ffffff" />
+            </div>
+            <div style={{ width: "10px", height: "1px" }} />
+            <div
+              style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
+              className="bcv-btn"
+              title="Delete Poll"
+            >
+              <img src="https://icongr.am/clarity/trash.svg?size=18&color=ffffff" />
+            </div>
+          </div>
         </div>
       </div>
     );
   }
   renderPolls() {
-    return [1, 1, 1, 1, 1, 11, 1, 11, 1, 1, 1, 1, 1, 1, 1, 11, 1, 11, 1, 1].map(
-      item => this.renderPoll()
+    return (
+      <div className="bcv-dasboard-polls">
+        {this.state.searched_polls.map(poll => this.renderPoll(poll))}
+      </div>
     );
   }
   render() {
     return (
       <div className="bcv-page_wrapper">
         <div className="bcv-dasboard">
-          <div style={{ display: "flex", width: "100%" }}>
+          <div className="bcv-dasboard-header_block">
             {this.renderSearchBar()}
             {this.renderCheckButton()}
           </div>
+          {this.renderPollTableHeader()}
           {this.renderPolls()}
         </div>
       </div>

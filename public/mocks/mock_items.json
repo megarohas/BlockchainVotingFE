@@ -1,14 +1,164 @@
 {
-  "list_items": [
-    { "id": 0, "text": "O1 Layer", "is_selected": false },
-    { "id": 1, "text": "O1 Layer", "is_selected": false },
-    { "id": 2, "text": "O1 Layer", "is_selected": false },
-    { "id": 3, "text": "O1 Layer", "is_selected": false },
-    { "id": 4, "text": "O1 Layer", "is_selected": false },
-    { "id": 5, "text": "O1 Layer", "is_selected": false },
-    { "id": 6, "text": "O1 Layer", "is_selected": false },
-    { "id": 7, "text": "O1 Layer", "is_selected": false },
-    { "id": 8, "text": "O1 Layer", "is_selected": false },
-    { "id": 9, "text": "O1 Layer", "is_selected": false }
+  "polls": [
+    {
+      "id": 0,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 1,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 2,
+      "author": "test@testmail.com",
+      "status": false,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 3,
+      "author": "test@testmail.com",
+      "status": false,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 4,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 5,
+      "author": "test@testmail.com",
+      "status": false,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 6,
+      "author": "test@testmail.com",
+      "status": false,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 7,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 8,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 9,
+      "author": "test@testmail.com",
+      "status": false,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 10,
+      "author": "test@testmail.com",
+      "status": false,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 11,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 12,
+      "author": "test@testmail.com",
+      "status": false,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 13,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 14,
+      "author": "test@testmail.com",
+      "status": false,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 15,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 16,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 17,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 18,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    },
+    {
+      "id": 19,
+      "author": "test@testmail.com",
+      "status": false,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "theme": "stranger things"
+    }
   ]
 }

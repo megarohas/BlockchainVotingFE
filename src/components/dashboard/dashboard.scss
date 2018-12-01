@@ -62,10 +62,62 @@
   //max-width: 100%;
   //width: 100%;
 }
+.bcv-dasboard-poll_table-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 20px;
+  background-color: white;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1); /* Параметры тени */
+  //margin-top: 20px;
+  position: fixed;
+  top: 144px;
+  width: calc(80% - 40px);
+  //max-width: 100%;
+  //width: 100%;
+}
 
 .bcv-dasboard-poll-node {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.bcv-dasboard-polls {
+  width: 100%;
+  margin-top: 104px;
+}
+
+.bcv-dasboard-header_block {
+  display: flex;
+  position: fixed;
+  top: 70px;
+  width: 80%;
+}
+
+.bcv-dasboard-poll-node-status {
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  padding: 4px;
+  //background-color: rgb(91, 182, 115);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bcv-dasboard-poll-node-status-ok {
+  width: 100%;
+  height: 100%;
+  //border: 2px solid black;
+  //padding: 2px;
+  background-color: rgb(91, 182, 115);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bcv-dasboard-poll-node-status-not_ok {
+  @extend .bcv-dasboard-poll-node-status-ok;
+  background-color: #ff2052;
 }
