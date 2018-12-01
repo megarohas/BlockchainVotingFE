@@ -143,7 +143,7 @@ export default class extends PureComponent {
                 this.props.closeFunction();
               }}
             >
-              Create
+              Cancel
             </div>
             <div style={{ width: "4px", height: "1px" }} />
             <div
@@ -152,7 +152,7 @@ export default class extends PureComponent {
                 this.props.closeFunction();
               }}
             >
-              Cancel
+              Create
             </div>
           </div>
         </div>

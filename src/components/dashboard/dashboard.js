@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { deleteListItem } from "../../actions/actions.js";
 import DebounceInput from "react-debounce-input";
 import CreatePollModal from "../create_poll_modal/create_poll_modal.js";
+import ViewPollModal from "../view_poll_modal/view_poll_modal.js";
 import { get } from "../../utils/fetcher.js";
 
 class Dashboard extends PureComponent {
@@ -14,7 +15,10 @@ class Dashboard extends PureComponent {
       polls: [],
       searched_polls: [],
       search_query: "",
-      create_poll_modal_state: false
+      create_poll_modal_state: false,
+      view_poll_modal_state: false,
+      deleted_polls: [],
+      active_poll: { variants: [] }
     };
   }
   componentDidMount() {
@@ -23,7 +27,8 @@ class Dashboard extends PureComponent {
       console.log(response);
       this.setState({
         polls: response.polls,
-        searched_polls: response.polls
+        searched_polls: response.polls,
+        active_poll: response.polls[0]
       });
     });
   }
@@ -145,6 +150,12 @@ class Dashboard extends PureComponent {
               style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
               className="bcv-btn"
               title="View Poll"
+              onClick={() => {
+                this.setState({
+                  view_poll_modal_state: true,
+                  active_poll: poll
+                });
+              }}
             >
               <img src="https://icongr.am/clarity/eye.svg?size=18&color=ffffff" />
             </div>
@@ -153,6 +164,11 @@ class Dashboard extends PureComponent {
               style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
               className="bcv-btn"
               title="Delete Poll"
+              onClick={() => {
+                this.setState({
+                  deleted_polls: [...this.state.deleted_polls, poll.id]
+                });
+              }}
             >
               <img src="https://icongr.am/clarity/trash.svg?size=18&color=ffffff" />
             </div>
@@ -174,6 +190,7 @@ class Dashboard extends PureComponent {
                 .toUpperCase()
                 .includes(this.state.search_query.toUpperCase())
           )
+          .filter(poll => !this.state.deleted_polls.includes(poll.id))
           .map(poll => this.renderPoll(poll))}
       </div>
     );
@@ -191,6 +208,17 @@ class Dashboard extends PureComponent {
         ) : (
           ""
         )}
+        {this.state.view_poll_modal_state ? (
+          <ViewPollModal
+            token="kek"
+            poll={this.state.active_poll}
+            closeFunction={() => {
+              this.setState({ view_poll_modal_state: false });
+            }}
+          />
+        ) : (
+          ""
+        )}
         <div className="bcv-dasboard">
           <div className="bcv-dasboard-header_block">
             {this.renderSearchBar()}
@@ -199,6 +227,7 @@ class Dashboard extends PureComponent {
           </div>
           {this.renderPollTableHeader()}
           {this.renderPolls()}
+          <div style={{ width: "1px", height: "50px" }} />
         </div>
       </div>
     );
