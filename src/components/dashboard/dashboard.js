@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { deleteListItem } from "../../actions/actions.js";
 import DebounceInput from "react-debounce-input";
+import CreatePollModal from "../create_poll_modal/create_poll_modal.js";
 import { get } from "../../utils/fetcher.js";
 
 class Dashboard extends PureComponent {
@@ -12,7 +13,8 @@ class Dashboard extends PureComponent {
     this.state = {
       polls: [],
       searched_polls: [],
-      search_query: ""
+      search_query: "",
+      create_poll_modal_state: false
     };
   }
   componentDidMount() {
@@ -75,6 +77,9 @@ class Dashboard extends PureComponent {
           fontSize: "16px"
         }}
         className="bcv-btn"
+        onClick={() => {
+          this.setState({ create_poll_modal_state: true });
+        }}
       >
         Add New Poll
       </div>
@@ -176,6 +181,16 @@ class Dashboard extends PureComponent {
   render() {
     return (
       <div className="bcv-page_wrapper">
+        {this.state.create_poll_modal_state ? (
+          <CreatePollModal
+            token="kek"
+            closeFunction={() => {
+              this.setState({ create_poll_modal_state: false });
+            }}
+          />
+        ) : (
+          ""
+        )}
         <div className="bcv-dasboard">
           <div className="bcv-dasboard-header_block">
             {this.renderSearchBar()}
