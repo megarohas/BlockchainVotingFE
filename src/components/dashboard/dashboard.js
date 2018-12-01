@@ -10,8 +10,9 @@ class Dashboard extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      all_polls: [],
-      searched_polls: []
+      polls: [],
+      searched_polls: [],
+      search_query: ""
     };
   }
   componentDidMount() {
@@ -19,7 +20,7 @@ class Dashboard extends PureComponent {
     get("../../../public/mocks/mock_items.json").then(response => {
       console.log(response);
       this.setState({
-        all_polls: response.polls,
+        polls: response.polls,
         searched_polls: response.polls
       });
     });
@@ -42,6 +43,7 @@ class Dashboard extends PureComponent {
             debounceTimeout={300}
             onChange={e => {
               console.log(e.target.value);
+              this.setState({ search_query: e.target.value });
             }}
           />
         </div>
@@ -50,15 +52,40 @@ class Dashboard extends PureComponent {
   }
   renderCheckButton() {
     return (
-      <div style={{ marginLeft: "20px", width: "200px" }} className="bcv-btn">
+      <div
+        style={{
+          marginLeft: "20px",
+          width: "150px",
+          padding: "5px",
+          fontSize: "16px"
+        }}
+        className="bcv-btn"
+      >
         Check All Polls
+      </div>
+    );
+  }
+  renderAddPollButton() {
+    return (
+      <div
+        style={{
+          marginLeft: "20px",
+          width: "150px",
+          padding: "5px",
+          fontSize: "16px"
+        }}
+        className="bcv-btn"
+      >
+        Add New Poll
       </div>
     );
   }
   renderPollTableHeader() {
     return (
       <div className="bcv-dasboard-poll_table-header">
-        <div className="bcv-dasboard-poll-node">Poll ID</div>
+        <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
+          Poll ID
+        </div>
         <div className="bcv-dasboard-poll-node" style={{ width: "150%" }}>
           Author
         </div>
@@ -78,7 +105,9 @@ class Dashboard extends PureComponent {
     return (
       <div style={{ width: "100%" }}>
         <div className="bcv-dasboard-poll">
-          <div className="bcv-dasboard-poll-node">{poll.id}</div>
+          <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
+            {poll.id}
+          </div>
           <div className="bcv-dasboard-poll-node" style={{ width: "150%" }}>
             {poll.author}
           </div>
@@ -130,7 +159,17 @@ class Dashboard extends PureComponent {
   renderPolls() {
     return (
       <div className="bcv-dasboard-polls">
-        {this.state.searched_polls.map(poll => this.renderPoll(poll))}
+        {this.state.polls
+          .filter(
+            poll =>
+              poll.theme
+                .toUpperCase()
+                .includes(this.state.search_query.toUpperCase()) ||
+              poll.author
+                .toUpperCase()
+                .includes(this.state.search_query.toUpperCase())
+          )
+          .map(poll => this.renderPoll(poll))}
       </div>
     );
   }
@@ -141,6 +180,7 @@ class Dashboard extends PureComponent {
           <div className="bcv-dasboard-header_block">
             {this.renderSearchBar()}
             {this.renderCheckButton()}
+            {this.renderAddPollButton()}
           </div>
           {this.renderPollTableHeader()}
           {this.renderPolls()}

@@ -2,11 +2,11 @@
   "polls": [
     {
       "id": 0,
-      "author": "test@testmail.com",
+      "author": "test1@testmail.com",
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
-      "theme": "stranger things"
+      "theme": "biba"
     },
     {
       "id": 1,
@@ -14,7 +14,7 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
-      "theme": "stranger things"
+      "theme": "biba"
     },
     {
       "id": 2,
@@ -22,7 +22,7 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
-      "theme": "stranger things"
+      "theme": "boba"
     },
     {
       "id": 3,
