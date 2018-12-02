@@ -7,6 +7,7 @@ import DebounceInput from "react-debounce-input";
 import CreatePollModal from "../create_poll_modal/create_poll_modal.js";
 import ViewPollModal from "../view_poll_modal/view_poll_modal.js";
 import { get } from "../../utils/fetcher.js";
+import { setField } from "../../actions/actions.js";
 
 class Dashboard extends PureComponent {
   constructor(props) {
@@ -18,7 +19,8 @@ class Dashboard extends PureComponent {
       create_poll_modal_state: false,
       view_poll_modal_state: false,
       deleted_polls: [],
-      active_poll: { variants: [] }
+      active_poll: { variants: [] },
+      is_admin: false
     };
   }
   componentDidMount() {
@@ -28,14 +30,18 @@ class Dashboard extends PureComponent {
       this.setState({
         polls: response.polls,
         searched_polls: response.polls,
-        active_poll: response.polls[0]
+        active_poll: response.polls[0],
+        is_admin: true
       });
     });
   }
 
   renderSearchBar() {
     return (
-      <div className="bcv-dasboard-searchbar">
+      <div
+        className="bcv-dasboard-searchbar"
+        style={this.state.is_admin ? {} : { width: "100%" }}
+      >
         <div className="bcv-dasboard-searchbar_border">
           <img
             className="bcv-dasboard-searchbar-ico"
@@ -104,9 +110,13 @@ class Dashboard extends PureComponent {
         </div>
         <div className="bcv-dasboard-poll-node">Start Date</div>
         <div className="bcv-dasboard-poll-node">Finish Date</div>
-        <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
-          Status
-        </div>
+        {this.state.is_admin ? (
+          <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
+            Status
+          </div>
+        ) : (
+          ""
+        )}
         <div className="bcv-dasboard-poll-node">Actions</div>
       </div>
     );
@@ -115,6 +125,11 @@ class Dashboard extends PureComponent {
     return (
       <div style={{ width: "100%" }}>
         <div className="bcv-dasboard-poll">
+          {poll.completed ? (
+            <div className="bcv-dasboard-poll-node-completed">COMPLETED</div>
+          ) : (
+            ""
+          )}
           <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
             {poll.id}
           </div>
@@ -126,25 +141,33 @@ class Dashboard extends PureComponent {
           </div>
           <div className="bcv-dasboard-poll-node">{poll.start_date}</div>
           <div className="bcv-dasboard-poll-node">{poll.finish_date}</div>
-          <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
-            <div className="bcv-dasboard-poll-node-status">
-              <div
-                className={
-                  poll.status
-                    ? "bcv-dasboard-poll-node-status-ok"
-                    : "bcv-dasboard-poll-node-status-not_ok"
-                }
-              />
+          {this.state.is_admin ? (
+            <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
+              <div className="bcv-dasboard-poll-node-status">
+                <div
+                  className={
+                    poll.status
+                      ? "bcv-dasboard-poll-node-status-ok"
+                      : "bcv-dasboard-poll-node-status-not_ok"
+                  }
+                />
+              </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
           <div className="bcv-dasboard-poll-node">
-            <div
-              style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
-              className="bcv-btn"
-              title="Check Poll"
-            >
-              <img src="https://icongr.am/clarity/shield-check.svg?size=18&color=ffffff" />
-            </div>
+            {this.state.is_admin ? (
+              <div
+                style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
+                className="bcv-btn"
+                title="Check Poll"
+              >
+                <img src="https://icongr.am/clarity/shield-check.svg?size=18&color=ffffff" />
+              </div>
+            ) : (
+              ""
+            )}
             <div style={{ width: "10px", height: "1px" }} />
             <div
               style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
@@ -160,18 +183,22 @@ class Dashboard extends PureComponent {
               <img src="https://icongr.am/clarity/eye.svg?size=18&color=ffffff" />
             </div>
             <div style={{ width: "10px", height: "1px" }} />
-            <div
-              style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
-              className="bcv-btn"
-              title="Delete Poll"
-              onClick={() => {
-                this.setState({
-                  deleted_polls: [...this.state.deleted_polls, poll.id]
-                });
-              }}
-            >
-              <img src="https://icongr.am/clarity/trash.svg?size=18&color=ffffff" />
-            </div>
+            {this.state.is_admin ? (
+              <div
+                style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
+                className="bcv-btn"
+                title="Delete Poll"
+                onClick={() => {
+                  this.setState({
+                    deleted_polls: [...this.state.deleted_polls, poll.id]
+                  });
+                }}
+              >
+                <img src="https://icongr.am/clarity/trash.svg?size=18&color=ffffff" />
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
@@ -211,6 +238,7 @@ class Dashboard extends PureComponent {
         {this.state.view_poll_modal_state ? (
           <ViewPollModal
             token="kek"
+            is_admin={this.state.is_admin}
             poll={this.state.active_poll}
             closeFunction={() => {
               this.setState({ view_poll_modal_state: false });
@@ -222,8 +250,8 @@ class Dashboard extends PureComponent {
         <div className="bcv-dasboard">
           <div className="bcv-dasboard-header_block">
             {this.renderSearchBar()}
-            {this.renderCheckButton()}
-            {this.renderAddPollButton()}
+            {this.state.is_admin ? this.renderCheckButton() : ""}
+            {this.state.is_admin ? this.renderAddPollButton() : ""}
           </div>
           {this.renderPollTableHeader()}
           {this.renderPolls()}
@@ -246,7 +274,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  //deleteListItem: bindActionCreators(deleteListItem, dispatch)
+  setField: bindActionCreators(setField, dispatch)
 });
 
 export default connect(

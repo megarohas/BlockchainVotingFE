@@ -6,8 +6,65 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "biba boba brabek &biba boba brabek &biba boba brabek &",
-      "done": false,
+      "completed": false,
+      "variants": [
+        {
+          "title": "test_variant_0 ",
+          "id": 0,
+          "value": "543",
+          "percent_value": "80%"
+        },
+        {
+          "title": "test_variant_1",
+          "id": 1,
+          "value": "53",
+          "percent_value": "11%"
+        },
+        {
+          "title": "test_variant_2",
+          "id": 2,
+          "value": "243",
+          "percent_value": "40%"
+        },
+        {
+          "title": "test_variant_0 ",
+          "id": 3,
+          "value": "543",
+          "percent_value": "80%"
+        },
+        {
+          "title": "test_variant_1",
+          "id": 4,
+          "value": "53",
+          "percent_value": "11%"
+        },
+        {
+          "title": "test_variant_2",
+          "id": 5,
+          "value": "243",
+          "percent_value": "40%"
+        },
+        {
+          "title": "test_variant_0 ",
+          "id": 6,
+          "value": "543",
+          "percent_value": "80%"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "author": "test@testmail.com",
+      "status": true,
+      "start_date": "11.11.29",
+      "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
+      "theme": "biba",
+      "completed": false,
       "variants": [
         {
           "title": "test_variant_0",
@@ -26,33 +83,22 @@
           "id": 2,
           "value": "243",
           "percent_value": "40%"
-        }
-      ]
-    },
-    {
-      "id": 1,
-      "author": "test@testmail.com",
-      "status": true,
-      "start_date": "11.11.29",
-      "finish_date": "11.12.29",
-      "theme": "biba",
-      "done": false,
-      "variants": [
+        },
         {
           "title": "test_variant_0",
-          "id": 0,
+          "id": 3,
           "value": "543",
           "percent_value": "80%"
         },
         {
           "title": "test_variant_1",
-          "id": 1,
+          "id": 4,
           "value": "53",
           "percent_value": "11%"
         },
         {
           "title": "test_variant_2",
-          "id": 2,
+          "id": 5,
           "value": "243",
           "percent_value": "40%"
         }
@@ -64,8 +110,10 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "boba",
-      "done": false,
+      "completed": false,
       "variants": [
         {
           "title": "test_variant_0",
@@ -93,8 +141,10 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -122,8 +172,10 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -151,8 +203,10 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -180,8 +234,10 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -209,8 +265,10 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -238,8 +296,10 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -267,8 +327,10 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -296,8 +358,10 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -325,8 +389,10 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -354,8 +420,10 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -383,8 +451,10 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -412,8 +482,10 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -441,8 +513,10 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -470,8 +544,10 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -499,8 +575,10 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -528,8 +606,10 @@
       "status": true,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",
@@ -557,8 +637,10 @@
       "status": false,
       "start_date": "11.11.29",
       "finish_date": "11.12.29",
+      "description":
+        "Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah",
       "theme": "stranger things",
-      "done": true,
+      "completed": true,
       "variants": [
         {
           "title": "test_variant_0",

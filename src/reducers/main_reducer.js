@@ -16,7 +16,11 @@ export default (state = default_state, action) => {
         active_page: action.payload.id
       };
     }
-
+    case "SET_FIELD": {
+      let new_state = { ...state };
+      new_state[action.payload.field] = action.payload.value;
+      return new_state;
+    }
     default: {
       return state;
     }

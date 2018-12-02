@@ -59,6 +59,7 @@
   background-color: white;
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1); /* Параметры тени */
   margin-top: 20px;
+  position: relative;
   //max-width: 100%;
   //width: 100%;
 }
@@ -76,6 +77,7 @@
   //max-width: 100%;
   //width: 100%;
   min-width: 760px;
+  z-index: 99;
 }
 
 .bcv-dasboard-poll-node {
@@ -95,6 +97,7 @@
   top: 70px;
   width: 80%;
   min-width: 800px;
+  z-index: 99;
 }
 
 .bcv-dasboard-poll-node-status {
@@ -122,4 +125,26 @@
 .bcv-dasboard-poll-node-status-not_ok {
   @extend .bcv-dasboard-poll-node-status-ok;
   background-color: #ff2052;
+}
+
+.bcv-dasboard-poll-node-completed {
+  position: absolute;
+  bottom: 24px;
+  left: -50px;
+  background-color: black;
+  padding: 5px;
+  color: white;
+  font-size: 10px;
+  transform: rotate(-90deg);
+  width: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // position: absolute;
+  // bottom: 0px;
+  // left: 0px;
+  // background-color: black;
+  // padding: 5px;
+  // color: white;
+  // font-size: 10px;
 }

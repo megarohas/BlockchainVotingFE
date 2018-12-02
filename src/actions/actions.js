@@ -18,3 +18,12 @@ export function setActivePage(id) {
     payload: { id }
   };
 }
+
+export function setField(field, value) {
+  //console.log('field', field);
+  //console.log('value', value);
+  return {
+    type: "SET_FIELD",
+    payload: { field, value }
+  };
+}

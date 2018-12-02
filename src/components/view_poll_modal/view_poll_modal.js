@@ -18,20 +18,26 @@ export default class ViewPollModal extends PureComponent {
       let btn_style = {};
       if (variant.id == this.state.active_variant) {
         style = {
-          color: "rgb(91, 182, 115)"
+          // backgroundColor: "rgb(91, 182, 115)",
+          // color: "white"
+          color: "rgb(91, 182, 115)",
+          border: "2px solid rgb(91, 182, 115)"
+          //padding: "5px 0px"
         };
         btn_style = {
-          backgroundColor: "rgb(91, 182, 115)",
-          borderColor: "rgb(91, 182, 115)"
+          // backgroundColor: "rgb(91, 182, 115)",
+          backgroundColor: "white",
+          //borderColor: "rgb(91, 182, 115)"
+          borderColor: "white"
         };
       }
       let action = (
         <div
           style={{
             ...btn_style,
-            width: "15%",
+            width: "9%",
             fontSize: "9px",
-            padding: "2px 0px",
+            padding: "5px 0px",
             marginLeft: "4px"
           }}
           className="bcv-btn"
@@ -42,20 +48,30 @@ export default class ViewPollModal extends PureComponent {
             });
           }}
         >
-          <img src="https://icongr.am/clarity/thumbs-up.svg?size=25&color=ffffff" />
+          <img
+            src={
+              variant.id == this.state.active_variant
+                ? ""
+                : "https://icongr.am/clarity/thumbs-up.svg?size=25&color=ffffff"
+            }
+          />
         </div>
       );
 
       return (
         <div className="bcv-hello_form-form-input_block-node">
-          <div className="bcv-hello_form-form-node_title" style={style}>
-            Variant {index + 1}:
-          </div>
           <div
             className="bcv-day_picker_input-wrapper"
-            style={{ ...style, marginRight: "0px" }}
+            style={{ ...style, marginRight: "0px", padding: "10px 10px" }}
           >
-            {variant.title} {action}
+            {variant.title}{" "}
+            {this.props.poll.completed ? (
+              <div className="bcv-view_poll_modal-percent_value">
+                {this.props.poll.variants[index].percent_value}
+              </div>
+            ) : (
+              action
+            )}
           </div>
         </div>
       );
@@ -77,11 +93,19 @@ export default class ViewPollModal extends PureComponent {
   }
   renderField(title, value) {
     return (
-      <div className="bcv-hello_form-form-input_block-node">
+      <div
+        className="bcv-hello_form-form-input_block-node"
+        style={{ alignItems: "flex-start" }}
+      >
         <div className="bcv-hello_form-form-node_title">{title}</div>
         <div
           className="bcv-day_picker_input-wrapper"
-          style={{ marginRight: "0px" }}
+          style={{
+            marginRight: "0px",
+            maxHeight: "57px",
+            overflow: "scroll",
+            alignItems: "flex-start"
+          }}
         >
           {value}
         </div>
@@ -97,6 +121,7 @@ export default class ViewPollModal extends PureComponent {
           height: "2px",
           backgroundColor: "black",
           marginBottom: "20px"
+          //  marginTop: "20px"
         }}
       />
     );
@@ -106,7 +131,7 @@ export default class ViewPollModal extends PureComponent {
       <div
         className="bcv-hello_form"
         style={{
-          zIndex: "99",
+          zIndex: "999",
           backgroundColor: "rgba(1,0,0,0.4)"
           //filter: "blur(5px)"
         }}
@@ -118,9 +143,10 @@ export default class ViewPollModal extends PureComponent {
           {this.renderField("Theme:", this.props.poll.theme)}
           {this.renderField("Start Date:", this.props.poll.start_date)}
           {this.renderField("Finish Date:", this.props.poll.finish_date)}
+          {this.renderField("Description:", this.props.poll.description)}
           {this.renderTr()}
           {this.renderVariants()}
-
+          {this.renderTr()}
           <div className="bcv-create_poll_modal-btn_block">
             {this.state.active_variant != -1 ? (
               <div
@@ -134,7 +160,7 @@ export default class ViewPollModal extends PureComponent {
             ) : (
               ""
             )}
-            <div style={{ width: "4px", height: "1px" }} />
+            <div style={{ width: "5px", height: "1px" }} />
             <div
               className="bcv-btn"
               onClick={() => {

@@ -10,7 +10,8 @@ export default class extends PureComponent {
       variants: [{ value: "" }],
       theme: "",
       start_date: "",
-      finish_date: ""
+      finish_date: "",
+      description: ""
     };
   }
 
@@ -22,11 +23,17 @@ export default class extends PureComponent {
             width: "20%",
             fontSize: "9px",
             padding: "0px 0px",
-            marginLeft: "4px"
+            marginLeft: "3px"
           }}
           className="bcv-btn"
           title="Add Variant"
           onClick={() => {
+            // document.body.scrollTop = 0; // For Safari
+            // document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            //let objDiv = document.getElementById("bcv-cpm-vsb");
+            //console.log("objDiv.scrollHeight", objDiv.scrollHeight);
+            //objDiv.scrollTop = objDiv.scrollHeight + 500;
+            //objDiv.scrollTop = 0;
             this.setState({
               variants: [...this.state.variants, { value: "" }]
             });
@@ -119,12 +126,27 @@ export default class extends PureComponent {
       </div>
     );
   }
+  renderDescriptionDateField() {
+    return (
+      <div className="bcv-hello_form-form-input_block-node">
+        <div className="bcv-hello_form-form-node_title">Description:</div>
+        <textarea
+          className="bcv-hello_form-form-node_input"
+          style={{ height: "100px" }}
+          value={this.state.description}
+          onChange={e => {
+            this.setState({ description: e.target.value });
+          }}
+        />
+      </div>
+    );
+  }
   render() {
     return (
       <div
         className="bcv-hello_form"
         style={{
-          zIndex: "99",
+          zIndex: "999",
           backgroundColor: "rgba(1,0,0,0.4)"
           //filter: "blur(5px)"
         }}
@@ -134,8 +156,18 @@ export default class extends PureComponent {
           {this.renderThemeField()}
           {this.renderStartDateField()}
           {this.renderFinishDateField()}
-          {this.renderVariants()}
-
+          {this.renderDescriptionDateField()}
+          <div
+            id="bcv-cpm-vsb"
+            style={{
+              width: "100%",
+              maxHeight: "200px",
+              overflow: "scroll"
+            }}
+          >
+            {this.renderVariants()}
+          </div>
+          <div style={{ width: "3px", height: "20px" }} />
           <div className="bcv-create_poll_modal-btn_block">
             <div
               className="bcv-btn"
@@ -145,7 +177,7 @@ export default class extends PureComponent {
             >
               Cancel
             </div>
-            <div style={{ width: "4px", height: "1px" }} />
+            <div style={{ width: "3px", height: "1px" }} />
             <div
               className="bcv-btn"
               onClick={() => {
