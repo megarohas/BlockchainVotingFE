@@ -157,7 +157,7 @@ class Dashboard extends PureComponent {
             ""
           )}
           <div className="bcv-dasboard-poll-node">
-            {this.state.is_admin ? (
+            {this.state.is_admin && !poll.completed ? (
               <div
                 style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
                 className="bcv-btn"
@@ -168,21 +168,33 @@ class Dashboard extends PureComponent {
             ) : (
               ""
             )}
-            <div style={{ width: "10px", height: "1px" }} />
-            <div
-              style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
-              className="bcv-btn"
-              title="View Poll"
-              onClick={() => {
-                this.setState({
-                  view_poll_modal_state: true,
-                  active_poll: poll
-                });
-              }}
-            >
-              <img src="https://icongr.am/clarity/eye.svg?size=18&color=ffffff" />
-            </div>
-            <div style={{ width: "10px", height: "1px" }} />
+            {this.state.is_admin && !poll.completed ? (
+              <div style={{ width: "10px", height: "1px" }} />
+            ) : (
+              ""
+            )}
+            {!poll.completed ? (
+              <div
+                style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
+                className="bcv-btn"
+                title="View Poll"
+                onClick={() => {
+                  this.setState({
+                    view_poll_modal_state: true,
+                    active_poll: poll
+                  });
+                }}
+              >
+                <img src="https://icongr.am/clarity/eye.svg?size=18&color=ffffff" />
+              </div>
+            ) : (
+              ""
+            )}
+            {this.state.is_admin && !poll.completed ? (
+              <div style={{ width: "10px", height: "1px" }} />
+            ) : (
+              ""
+            )}
             {this.state.is_admin ? (
               <div
                 style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
