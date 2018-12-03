@@ -90,7 +90,7 @@ export default class ViewPollModal extends PureComponent {
             className="bcv-create_poll_modal-title"
             style={{ width: "calc(100% - 20px)", marginLeft: "20px" }}
           >
-            Make Your Choice :
+            Make Your Choice
           </div>
         }
         <div className="bcv-view_poll_modal-additional_block">

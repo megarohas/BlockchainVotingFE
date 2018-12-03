@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { deleteListItem } from "../../actions/actions.js";
 import ReCAPTCHA from "react-google-recaptcha";
+import { setField } from "../../actions/actions.js";
 
 class HelloForm extends PureComponent {
   constructor(props) {
@@ -110,6 +111,7 @@ class HelloForm extends PureComponent {
               reg_btn_state: false,
               login_btn_state: false
             });
+            this.props.setField("active_page", 1);
           }}
         >
           Create an account
@@ -129,6 +131,7 @@ class HelloForm extends PureComponent {
               reg_btn_state: false,
               login_btn_state: false
             });
+            this.props.setField("active_page", 1);
           }}
         >
           LogIn
@@ -183,6 +186,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   //deleteListItem: bindActionCreators(deleteListItem, dispatch)
+  setField: bindActionCreators(setField, dispatch)
 });
 
 export default connect(

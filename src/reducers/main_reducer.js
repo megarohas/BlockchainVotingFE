@@ -1,5 +1,5 @@
 const default_state = {
-  active_page: 1
+  active_page: 0
 };
 
 export default (state = default_state, action) => {
