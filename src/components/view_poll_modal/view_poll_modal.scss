@@ -4,3 +4,17 @@
   justify-content: flex-end;
   width: 100%;
 }
+
+.bcv-view_poll_modal-additional_block {
+  background-color: white;
+  border-radius: 1px;
+  width: 360px;
+  //height: 300px;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1); /* Параметры тени */
+  padding: 20px;
+  margin: 0px 0px 0px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}

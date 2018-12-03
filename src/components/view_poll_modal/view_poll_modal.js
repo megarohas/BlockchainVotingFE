@@ -11,71 +11,93 @@ export default class ViewPollModal extends PureComponent {
     };
   }
 
-  renderVariants() {
-    console.log("this.props", this.props);
-    return this.props.poll.variants.map((variant, index) => {
-      let style = {};
-      let btn_style = {};
-      if (variant.id == this.state.active_variant) {
-        style = {
-          // backgroundColor: "rgb(91, 182, 115)",
-          // color: "white"
-          color: "rgb(91, 182, 115)",
-          border: "2px solid rgb(91, 182, 115)"
-          //padding: "5px 0px"
-        };
-        btn_style = {
-          // backgroundColor: "rgb(91, 182, 115)",
-          backgroundColor: "white",
-          //borderColor: "rgb(91, 182, 115)"
-          borderColor: "white"
-        };
-      }
-      let action = (
-        <div
-          style={{
-            ...btn_style,
-            width: "9%",
-            fontSize: "9px",
-            padding: "5px 0px",
-            marginLeft: "4px"
-          }}
-          className="bcv-btn"
-          title="Vote"
-          onClick={() => {
-            this.setState({
-              active_variant: variant.id
-            });
-          }}
-        >
-          <img
-            src={
-              variant.id == this.state.active_variant
-                ? ""
-                : "https://icongr.am/clarity/thumbs-up.svg?size=25&color=ffffff"
-            }
-          />
-        </div>
-      );
+  renderVariant(variant, index) {
+    let style = { border: "2px solid rgba(91, 182, 115,0)" };
+    let btn_style = {};
+    if (variant.id == this.state.active_variant) {
+      style = {
+        backgroundColor: "rgb(91, 182, 115)",
+        color: "white",
+        border: "2px solid rgb(91, 182, 115)"
+        // color: "rgb(91, 182, 115)",
+        // border: "2px solid rgb(91, 182, 115)"
+      };
+      btn_style = {
+        backgroundColor: "rgb(91, 182, 115)",
+        borderColor: "rgb(91, 182, 115)"
+      };
+    }
+    let action = (
+      <div
+        style={{
+          ...btn_style,
+          width: "15%",
+          fontSize: "9px",
+          padding: "5px 0px",
+          marginLeft: "4px"
+        }}
+        className="bcv-btn"
+        title="Vote"
+        onClick={() => {
+          this.setState({
+            active_variant: variant.id
+          });
+        }}
+      >
+        <img
+          src={
+            variant.id == this.state.active_variant
+              ? ""
+              : "https://icongr.am/clarity/thumbs-up.svg?size=25&color=ffffff"
+          }
+        />
+      </div>
+    );
 
-      return (
-        <div className="bcv-hello_form-form-input_block-node">
-          <div
-            className="bcv-day_picker_input-wrapper"
-            style={{ ...style, marginRight: "0px", padding: "10px 10px" }}
-          >
-            {variant.title}{" "}
-            {this.props.poll.completed ? (
-              <div className="bcv-view_poll_modal-percent_value">
-                {this.props.poll.variants[index].percent_value}
-              </div>
-            ) : (
-              action
-            )}
-          </div>
+    return (
+      <div
+        className="bcv-hello_form-form-input_block-node"
+        style={{ marginBottom: "0px", height: "45px" }}
+      >
+        <div
+          className="bcv-day_picker_input-wrapper"
+          style={{ ...style, marginRight: "0px", padding: "2px 10px" }}
+        >
+          {variant.title}{" "}
+          {this.props.poll.completed ? (
+            <div className="bcv-view_poll_modal-percent_value">
+              {this.props.poll.variants[index].percent_value}
+            </div>
+          ) : (
+            action
+          )}
         </div>
-      );
-    });
+      </div>
+    );
+  }
+
+  renderVariants() {
+    return this.props.poll.variants.map((variant, index) =>
+      this.renderVariant(variant, index)
+    );
+  }
+
+  renderAdditionalBlock() {
+    return (
+      <div>
+        {
+          <div
+            className="bcv-create_poll_modal-title"
+            style={{ width: "calc(100% - 20px)", marginLeft: "20px" }}
+          >
+            Make Your Choice :
+          </div>
+        }
+        <div className="bcv-view_poll_modal-additional_block">
+          {this.renderVariants()}
+        </div>
+      </div>
+    );
   }
   renderThemeField() {
     return (
@@ -102,7 +124,7 @@ export default class ViewPollModal extends PureComponent {
           className="bcv-day_picker_input-wrapper"
           style={{
             marginRight: "0px",
-            maxHeight: "57px",
+            maxHeight: "80px",
             overflow: "scroll",
             alignItems: "flex-start"
           }}
@@ -119,8 +141,8 @@ export default class ViewPollModal extends PureComponent {
         style={{
           width: "100%",
           height: "2px",
-          backgroundColor: "black",
-          marginBottom: "20px"
+          backgroundColor: "black"
+          //marginBottom: "20px"
           //  marginTop: "20px"
         }}
       />
@@ -136,40 +158,46 @@ export default class ViewPollModal extends PureComponent {
           //filter: "blur(5px)"
         }}
       >
-        <div className="bcv-create_poll_modal-title">
-          Poll #{this.props.poll.id}
-        </div>
-        <div className="bcv-hello_form-form" style={{ marginTop: "0px" }}>
-          {this.renderField("Theme:", this.props.poll.theme)}
-          {this.renderField("Start Date:", this.props.poll.start_date)}
-          {this.renderField("Finish Date:", this.props.poll.finish_date)}
-          {this.renderField("Description:", this.props.poll.description)}
-          {this.renderTr()}
-          {this.renderVariants()}
-          {this.renderTr()}
-          <div className="bcv-create_poll_modal-btn_block">
-            {this.state.active_variant != -1 ? (
+        <div style={{ display: "flex" }}>
+          <div>
+            <div className="bcv-create_poll_modal-title">
+              Poll #{this.props.poll.id}
+            </div>
+            <div className="bcv-hello_form-form" style={{ margin: "0px" }}>
+              {this.renderField("Theme:", this.props.poll.theme)}
+              {this.renderField("Start Date:", this.props.poll.start_date)}
+              {this.renderField("Finish Date:", this.props.poll.finish_date)}
+              {this.renderField("Description:", this.props.poll.description)}
+
               <div
-                className="bcv-btn"
-                onClick={() => {
-                  this.props.closeFunction();
-                }}
+                className="bcv-create_poll_modal-btn_block"
+                style={{ marginTop: "20px" }}
               >
-                Vote
+                {this.state.active_variant != -1 ? (
+                  <div
+                    className="bcv-btn"
+                    onClick={() => {
+                      this.props.closeFunction();
+                    }}
+                  >
+                    Vote
+                  </div>
+                ) : (
+                  ""
+                )}
+                <div style={{ width: "22px", height: "1px" }} />
+                <div
+                  className="bcv-btn"
+                  onClick={() => {
+                    this.props.closeFunction();
+                  }}
+                >
+                  Close
+                </div>
               </div>
-            ) : (
-              ""
-            )}
-            <div style={{ width: "5px", height: "1px" }} />
-            <div
-              className="bcv-btn"
-              onClick={() => {
-                this.props.closeFunction();
-              }}
-            >
-              Close
             </div>
           </div>
+          {this.renderAdditionalBlock()}
         </div>
       </div>
     );

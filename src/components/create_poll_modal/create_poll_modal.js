@@ -141,7 +141,35 @@ export default class extends PureComponent {
       </div>
     );
   }
+
+  renderAdditionalBlock() {
+    return (
+      <div>
+        {
+          <div
+            className="bcv-create_poll_modal-title"
+            style={{ width: "calc(100% - 20px)", marginLeft: "20px" }}
+          >
+            Make Your Choice :
+          </div>
+        }
+        <div className="bcv-view_poll_modal-additional_block">
+          {this.renderVariants()}
+        </div>
+      </div>
+    );
+  }
   render() {
+    // <div
+    //   id="bcv-cpm-vsb"
+    //   style={{
+    //     width: "100%",
+    //     maxHeight: "200px",
+    //     overflow: "scroll"
+    //   }}
+    // >
+    //   {this.renderVariants()}
+    // </div>
     return (
       <div
         className="bcv-hello_form"
@@ -151,42 +179,38 @@ export default class extends PureComponent {
           //filter: "blur(5px)"
         }}
       >
-        <div className="bcv-create_poll_modal-title">New Poll</div>
-        <div className="bcv-hello_form-form" style={{ marginTop: "0px" }}>
-          {this.renderThemeField()}
-          {this.renderStartDateField()}
-          {this.renderFinishDateField()}
-          {this.renderDescriptionDateField()}
-          <div
-            id="bcv-cpm-vsb"
-            style={{
-              width: "100%",
-              maxHeight: "200px",
-              overflow: "scroll"
-            }}
-          >
-            {this.renderVariants()}
-          </div>
-          <div style={{ width: "3px", height: "20px" }} />
-          <div className="bcv-create_poll_modal-btn_block">
-            <div
-              className="bcv-btn"
-              onClick={() => {
-                this.props.closeFunction();
-              }}
-            >
-              Cancel
-            </div>
-            <div style={{ width: "3px", height: "1px" }} />
-            <div
-              className="bcv-btn"
-              onClick={() => {
-                this.props.closeFunction();
-              }}
-            >
-              Create
+        <div style={{ display: "flex" }}>
+          <div>
+            <div className="bcv-create_poll_modal-title">New Poll</div>
+            <div className="bcv-hello_form-form" style={{ margin: "0px" }}>
+              {this.renderThemeField()}
+              {this.renderStartDateField()}
+              {this.renderFinishDateField()}
+              {this.renderDescriptionDateField()}
+
+              <div style={{ width: "3px", height: "20px" }} />
+              <div className="bcv-create_poll_modal-btn_block">
+                <div
+                  className="bcv-btn"
+                  onClick={() => {
+                    this.props.closeFunction();
+                  }}
+                >
+                  Cancel
+                </div>
+                <div style={{ width: "3px", height: "1px" }} />
+                <div
+                  className="bcv-btn"
+                  onClick={() => {
+                    this.props.closeFunction();
+                  }}
+                >
+                  Create
+                </div>
+              </div>
             </div>
           </div>
+          {this.renderAdditionalBlock()}
         </div>
       </div>
     );
