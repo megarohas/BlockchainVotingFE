@@ -157,7 +157,7 @@ class Dashboard extends PureComponent {
             ""
           )}
           <div className="bcv-dasboard-poll-node">
-            {this.state.is_admin && !poll.completed ? (
+            {this.state.is_admin ? (
               <div
                 style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
                 className="bcv-btn"
@@ -168,12 +168,12 @@ class Dashboard extends PureComponent {
             ) : (
               ""
             )}
-            {this.state.is_admin && !poll.completed ? (
+            {this.state.is_admin ? (
               <div style={{ width: "10px", height: "1px" }} />
             ) : (
               ""
             )}
-            {!poll.completed ? (
+            {poll.status ? (
               <div
                 style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
                 className="bcv-btn"
@@ -190,7 +190,7 @@ class Dashboard extends PureComponent {
             ) : (
               ""
             )}
-            {this.state.is_admin && !poll.completed ? (
+            {poll.status ? (
               <div style={{ width: "10px", height: "1px" }} />
             ) : (
               ""

@@ -66,7 +66,7 @@ export default class ViewPollModal extends PureComponent {
           {variant.title}{" "}
           {this.props.poll.completed ? (
             <div className="bcv-view_poll_modal-percent_value">
-              {this.props.poll.variants[index].percent_value}
+              {this.props.poll.variants[index].value}
             </div>
           ) : (
             action
