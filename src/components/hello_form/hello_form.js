@@ -72,7 +72,14 @@ class HelloForm extends PureComponent {
               }}
             />
           ) : (
-            <div className="bcv-btn">Log In</div>
+            <div
+              className="bcv-btn"
+              onClick={() => {
+                this.props.setField("active_page", 1);
+              }}
+            >
+              Log In
+            </div>
           )}
         </div>
       </div>
@@ -93,7 +100,14 @@ class HelloForm extends PureComponent {
               }}
             />
           ) : (
-            <div className="bcv-btn">Register</div>
+            <div
+              className="bcv-btn"
+              onClick={() => {
+                this.props.setField("active_page", 1);
+              }}
+            >
+              Register
+            </div>
           )}
         </div>
       </div>
@@ -111,7 +125,6 @@ class HelloForm extends PureComponent {
               reg_btn_state: false,
               login_btn_state: false
             });
-            this.props.setField("active_page", 1);
           }}
         >
           Create an account
@@ -131,7 +144,6 @@ class HelloForm extends PureComponent {
               reg_btn_state: false,
               login_btn_state: false
             });
-            this.props.setField("active_page", 1);
           }}
         >
           LogIn
