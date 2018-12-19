@@ -23,8 +23,9 @@ class Wrapper extends PureComponent {
   renderChildTitles() {
     return this.props.children.map((component, index) => (
       <div
+        key={index}
         className={
-          index == this.props.active_page
+          index === this.props.active_page
             ? "bcv-wrapper-nav_bar-item_active"
             : "bcv-wrapper-nav_bar-item"
         }

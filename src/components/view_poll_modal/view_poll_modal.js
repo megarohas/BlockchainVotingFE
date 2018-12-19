@@ -2,13 +2,23 @@ import React, { PureComponent } from "react";
 import "./view_poll_modal.scss";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
+import axios from 'axios';
 
 export default class ViewPollModal extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      active_variant: -1
+      active_variant: -1,
+      variants: []
     };
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:3001/polls/${this.props.poll.id}/options`)
+      .then(response => {
+        console.log(response);
+        this.setState({ variants: response.data });
+      });
   }
 
   renderVariant(variant, index) {
@@ -56,6 +66,7 @@ export default class ViewPollModal extends PureComponent {
 
     return (
       <div
+        key={variant.id}
         className="bcv-hello_form-form-input_block-node"
         style={{ marginBottom: "0px", height: "45px" }}
       >
@@ -63,10 +74,10 @@ export default class ViewPollModal extends PureComponent {
           className="bcv-day_picker_input-wrapper"
           style={{ ...style, marginRight: "0px", padding: "2px 10px" }}
         >
-          {variant.title}{" "}
+          {variant.content}{" "}
           {this.props.poll.completed ? (
             <div className="bcv-view_poll_modal-percent_value">
-              {this.props.poll.variants[index].value}
+              {this.state.variants[index].interest}
             </div>
           ) : (
             action
@@ -77,7 +88,7 @@ export default class ViewPollModal extends PureComponent {
   }
 
   renderVariants() {
-    return this.props.poll.variants.map((variant, index) =>
+    return this.state.variants.map((variant, index) =>
       this.renderVariant(variant, index)
     );
   }
@@ -177,7 +188,7 @@ export default class ViewPollModal extends PureComponent {
                   <div
                     className="bcv-btn"
                     onClick={() => {
-                      this.props.closeFunction();
+                      this.props.onVote(this.state.active_variant);
                     }}
                   >
                     Vote
@@ -205,5 +216,5 @@ export default class ViewPollModal extends PureComponent {
 }
 
 ViewPollModal.defaultProps = {
-  poll: { variants: [] }
+  poll: {}
 };

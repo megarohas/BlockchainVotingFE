@@ -11,7 +11,7 @@ class HelloForm extends PureComponent {
     super(props);
     this.state = {
       is_log_in: true,
-      login_btn_state: false,
+      login_btn_state: true,
       reg_btn_state: false,
       login: "",
       password: "",
