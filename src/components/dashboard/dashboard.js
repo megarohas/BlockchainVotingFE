@@ -40,30 +40,26 @@ class Dashboard extends PureComponent {
         response.data.forEach(poll => {
           poll.start_date = this.formatDate(new Date(poll.created_at));
           if (poll.ends_at)
-            poll.finish_date = this.formatDate(new Date(poll.ends_at).toString());
-          poll.completed = poll.ends_at && (new Date(poll.ends_at) > new Date(poll.created_at))
+            poll.finish_date = this.formatDate(new Date(poll.ends_at));
+          poll.completed = poll.ends_at && (new Date(poll.ends_at) < new Date(poll.created_at));
         });
         return response;
       })
       .then(response => {
-        response.data.forEach(poll => {
-          axios.get(`http://localhost:3001/users/${poll.id}`)
+        Promise.all(response.data.map(poll => {
+          return axios.get(`http://localhost:3001/users/${poll.user_id}`)
             .then(response => {
               poll.author = response.data.email;
             });
-        });
-        return response;
-      })
-      .then(response => {
-        setTimeout(() => {
+        })).then(() => {
           this.setState({
             polls: response.data,
             searched_polls: response.data,
-            active_poll: response.data[0],
-            is_admin: true
+            active_poll: response.data[0]
           });
-        }, 1000);
+        });
       });
+    this.setState({ is_admin: this.props.is_admin || false });
   }
 
   formatDate(date) {
@@ -98,7 +94,6 @@ class Dashboard extends PureComponent {
             minLength={2}
             debounceTimeout={300}
             onChange={e => {
-              console.log(e.target.value);
               this.setState({ search_query: e.target.value });
             }}
           />
@@ -116,6 +111,32 @@ class Dashboard extends PureComponent {
           fontSize: "16px"
         }}
         className="bcv-btn"
+        onClick={() => {
+          axios.get('http://localhost:3001/polls/')
+            .then(response => {
+              response.data.forEach(poll => {
+                poll.start_date = this.formatDate(new Date(poll.created_at));
+                if (poll.ends_at)
+                  poll.finish_date = this.formatDate(new Date(poll.ends_at));
+                poll.completed = poll.ends_at && (new Date(poll.ends_at) < new Date(poll.created_at))
+              });
+              return response;
+            })
+            .then(response => {
+              Promise.all(response.data.map(poll => {
+                return axios.get(`http://localhost:3001/users/${poll.user_id}`)
+                  .then(response => {
+                    poll.author = response.data.email;
+                  });
+              })).then(() => {
+                this.setState({
+                  polls: response.data,
+                  searched_polls: response.data,
+                  active_poll: response.data[0]
+                });
+              });
+            });
+        }}
       >
         Check All Polls
       </div>
@@ -153,13 +174,9 @@ class Dashboard extends PureComponent {
         </div>
         <div className="bcv-dasboard-poll-node">Start Date</div>
         <div className="bcv-dasboard-poll-node">Finish Date</div>
-        {this.state.is_admin ? (
-          <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
-            Status
-          </div>
-        ) : (
-          ""
-        )}
+        <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
+          Integrity
+        </div>
         <div className="bcv-dasboard-poll-node">Actions</div>
       </div>
     );
@@ -184,27 +201,41 @@ class Dashboard extends PureComponent {
           </div>
           <div className="bcv-dasboard-poll-node">{poll.start_date || 'N/A'}</div>
           <div className="bcv-dasboard-poll-node">{poll.finish_date || 'N/A'}</div>
-          {this.state.is_admin ? (
-            <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
-              <div className="bcv-dasboard-poll-node-status">
-                <div
-                  className={
-                    poll.valid
-                      ? "bcv-dasboard-poll-node-status-ok"
-                      : "bcv-dasboard-poll-node-status-not_ok"
-                  }
-                />
-              </div>
+          <div className="bcv-dasboard-poll-node" style={{ width: "50%" }}>
+            <div className="bcv-dasboard-poll-node-status">
+              <div
+                className={
+                  poll.valid
+                    ? "bcv-dasboard-poll-node-status-ok"
+                    : "bcv-dasboard-poll-node-status-not_ok"
+                }
+              />
             </div>
-          ) : (
-            ""
-          )}
+          </div>
           <div className="bcv-dasboard-poll-node">
             {this.state.is_admin ? (
               <div
                 style={{ width: "20%", fontSize: "9px", padding: "5px 0px" }}
                 className="bcv-btn"
                 title="Check Poll"
+                onClick={() => {
+                  axios.get(`http://localhost:3001/polls/${poll.id}`)
+                    .then(response => {
+                      const index = this.state.polls.indexOf(poll);
+                      let updatedPolls = [ ...this.state.polls ];
+                      let updatedPoll = response.data;
+                      axios.get(`http://localhost:3001/users/${poll.user_id}`)
+                        .then(response => {
+                          updatedPoll.author = response.data.email;
+                          updatedPoll.start_date = this.formatDate(new Date(updatedPoll.created_at));
+                          if (updatedPoll.ends_at)
+                            updatedPoll.finish_date = this.formatDate(new Date(updatedPoll.ends_at));
+                          updatedPoll.completed = updatedPoll.ends_at && (new Date(updatedPoll.ends_at) < new Date(updatedPoll.created_at));
+                          updatedPolls[index] = updatedPoll;
+                          this.setState({ polls: updatedPolls });
+                        });
+                    });
+                }}
               >
                 <img src="https://icongr.am/clarity/shield-check.svg?size=18&color=ffffff" />
               </div>
@@ -244,6 +275,11 @@ class Dashboard extends PureComponent {
                 className="bcv-btn"
                 title="Delete Poll"
                 onClick={() => {
+                  axios.delete(`http://localhost:3001/polls/${poll.id}`, {
+                    data: {
+                      auth_token: this.props.auth_token
+                    }
+                  });
                   this.setState({
                     deleted_polls: [...this.state.deleted_polls, poll.id]
                   });
@@ -283,7 +319,23 @@ class Dashboard extends PureComponent {
         {this.state.create_poll_modal_state ? (
           <CreatePollModal
             token="kek"
-            closeFunction={() => {
+            closeFunction={(poll) => {
+              try {
+                poll.ends_at = poll.ends_at.toISOString();
+              } catch(e) {}
+              axios.post('http://localhost:3001/polls', { ...poll, auth_token: this.props.auth_token })
+                .then(response => {
+                  Promise.all(poll.options.map(variant => {
+                    axios.post(`http://localhost:3001/polls/${response.data.id}/options`, { ...variant, auth_token: this.props.auth_token });
+                  })).then(() => {
+                    let poll = response.data;
+                    poll.start_date = this.formatDate(new Date(poll.created_at));
+                    if (poll.ends_at)
+                      poll.finish_date = this.formatDate(new Date(poll.ends_at));
+                    poll.completed = poll.ends_at && (new Date(poll.ends_at) < new Date(poll.created_at));
+                    this.setState({ polls: [ ...this.state.polls, response.data ] });
+                  });
+                });
               this.setState({ create_poll_modal_state: false });
             }}
           />
@@ -299,7 +351,9 @@ class Dashboard extends PureComponent {
               this.setState({ view_poll_modal_state: false });
             }}
             onVote={id => {
-              axios.post(`http://localhost:3001/polls/${this.state.active_poll.id}/options/${id}/votes`);
+              axios.post(`http://localhost:3001/polls/${this.state.active_poll.id}/options/${id}/votes`, {
+                auth_token: this.props.auth_token
+              });
             }}
           />
         ) : (
@@ -328,6 +382,8 @@ Dashboard.displayName = "Dashbord";
 const mapStateToProps = state => {
   return {
     //items: state.mainReducer.items
+    auth_token: state.mainReducer.auth_token,
+    is_admin: state.mainReducer.is_admin
   };
 };
 

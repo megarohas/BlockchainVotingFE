@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { deleteListItem } from "../../actions/actions.js";
 import ReCAPTCHA from "react-google-recaptcha";
 import { setField } from "../../actions/actions.js";
+import axios from 'axios';
 
 class HelloForm extends PureComponent {
   constructor(props) {
@@ -27,11 +28,19 @@ class HelloForm extends PureComponent {
       <div className="bcv-hello_form-form-input_block">
         <div className="bcv-hello_form-form-input_block-node">
           <div className="bcv-hello_form-form-node_title">Email:</div>
-          <input className="bcv-hello_form-form-node_input" />
+          <input
+            value={this.state.login}
+            onChange={(ev) => this.setState({ login: ev.target.value })}
+            className="bcv-hello_form-form-node_input"
+          />
         </div>
         <div className="bcv-hello_form-form-input_block-node">
           <div className="bcv-hello_form-form-node_title">Password:</div>
-          <input className="bcv-hello_form-form-node_input" type="password" />
+          <input
+            value={this.state.password}
+            onChange={(ev) => this.setState({ password: ev.target.value })}
+            className="bcv-hello_form-form-node_input" type="password"
+          />
         </div>
       </div>
     );
@@ -41,17 +50,29 @@ class HelloForm extends PureComponent {
       <div className="bcv-hello_form-form-input_block">
         <div className="bcv-hello_form-form-input_block-node">
           <div className="bcv-hello_form-form-node_title">Email:</div>
-          <input className="bcv-hello_form-form-node_input" />
+          <input
+            value={this.state.login}
+            onChange={(ev) => this.setState({ login: ev.target.value })}
+            className="bcv-hello_form-form-node_input"
+          />
         </div>
         <div className="bcv-hello_form-form-input_block-node">
           <div className="bcv-hello_form-form-node_title">Password:</div>
-          <input className="bcv-hello_form-form-node_input" type="password" />
+          <input
+            value={this.state.password}
+            onChange={(ev) => this.setState({ password: ev.target.value })}
+            className="bcv-hello_form-form-node_input" type="password"
+          />
         </div>
         <div className="bcv-hello_form-form-input_block-node">
           <div className="bcv-hello_form-form-node_title">
             Confirm Password:
           </div>
-          <input className="bcv-hello_form-form-node_input" type="password" />
+          <input
+            value={this.state.password_confirm}
+            onChange={(ev) => this.setState({ password_confirm: ev.target.value })}
+            className="bcv-hello_form-form-node_input" type="password"
+          />
         </div>
       </div>
     );
@@ -65,7 +86,6 @@ class HelloForm extends PureComponent {
             <ReCAPTCHA
               sitekey="6Lcxun0UAAAAAHYKikR75_A0dYupt4gf1yBB0qPn"
               onChange={value => {
-                console.log(value);
                 setTimeout(() => {
                   this.setState({ login_btn_state: true });
                 }, 1000);
@@ -75,7 +95,12 @@ class HelloForm extends PureComponent {
             <div
               className="bcv-btn"
               onClick={() => {
-                this.props.setField("active_page", 1);
+                axios.post('http://localhost:3001/users/sign_in', { email: this.state.login, password: this.state.password }).
+                  then(response => {
+                    this.props.setField("auth_token", response.data.auth_token);
+                    this.props.setField("is_admin", true);
+                    this.props.setField("active_page", 1);
+                  });
               }}
             >
               Log In
@@ -93,7 +118,6 @@ class HelloForm extends PureComponent {
             <ReCAPTCHA
               sitekey="6Lcxun0UAAAAAHYKikR75_A0dYupt4gf1yBB0qPn"
               onChange={value => {
-                console.log(value);
                 setTimeout(() => {
                   this.setState({ reg_btn_state: true });
                 }, 1000);
@@ -103,7 +127,11 @@ class HelloForm extends PureComponent {
             <div
               className="bcv-btn"
               onClick={() => {
-                this.props.setField("active_page", 1);
+                axios.post('http://localhost:3001/users', { email: this.state.login, password: this.state.password, password_confirmation: this.state.password_confirm }).
+                  then(response => {
+                    this.props.setField("auth_token", response.data.auth_token);
+                    this.props.setField("active_page", 1);
+                  });
               }}
             >
               Register
@@ -146,7 +174,7 @@ class HelloForm extends PureComponent {
             });
           }}
         >
-          LogIn
+          Log In
         </div>
       </div>
     );

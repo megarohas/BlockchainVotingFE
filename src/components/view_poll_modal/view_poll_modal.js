@@ -16,7 +16,6 @@ export default class ViewPollModal extends PureComponent {
   componentDidMount() {
     axios.get(`http://localhost:3001/polls/${this.props.poll.id}/options`)
       .then(response => {
-        console.log(response);
         this.setState({ variants: response.data });
       });
   }
@@ -176,8 +175,8 @@ export default class ViewPollModal extends PureComponent {
             </div>
             <div className="bcv-hello_form-form" style={{ margin: "0px" }}>
               {this.renderField("Theme:", this.props.poll.theme)}
-              {this.renderField("Start Date:", this.props.poll.start_date)}
-              {this.renderField("Finish Date:", this.props.poll.finish_date)}
+              {this.renderField("Start Date:", this.props.poll.start_date || 'N/A')}
+              {this.renderField("Finish Date:", this.props.poll.finish_date || 'N/A')}
               {this.renderField("Description:", this.props.poll.description)}
 
               <div
@@ -189,6 +188,7 @@ export default class ViewPollModal extends PureComponent {
                     className="bcv-btn"
                     onClick={() => {
                       this.props.onVote(this.state.active_variant);
+                      this.props.closeFunction();
                     }}
                   >
                     Vote

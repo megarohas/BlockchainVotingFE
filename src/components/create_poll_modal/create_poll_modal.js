@@ -120,7 +120,7 @@ export default class extends PureComponent {
         <div className="bcv-hello_form-form-node_title">Finish Date:</div>
         <div className="bcv-day_picker_input-wrapper">
           <DayPickerInput
-            onDayChange={day => this.setState({ finish_date: day })}
+            onDayChange={finish_date => this.setState({ finish_date })}
           />
         </div>
       </div>
@@ -184,7 +184,7 @@ export default class extends PureComponent {
             <div className="bcv-create_poll_modal-title">New Poll</div>
             <div className="bcv-hello_form-form" style={{ margin: "0px" }}>
               {this.renderThemeField()}
-              {this.renderStartDateField()}
+              {/*{this.renderStartDateField()}*/}
               {this.renderFinishDateField()}
               {this.renderDescriptionDateField()}
 
@@ -202,7 +202,12 @@ export default class extends PureComponent {
                 <div
                   className="bcv-btn"
                   onClick={() => {
-                    this.props.closeFunction();
+                    this.props.closeFunction({
+                      theme: this.state.theme,
+                      ends_at: this.state.finish_date,
+                      description: this.state.description,
+                      options: this.state.variants.map(variant => { return { content: variant.value } })
+                    });
                   }}
                 >
                   Create
